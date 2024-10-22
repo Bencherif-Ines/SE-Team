@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SE Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculator</h1>
+        <form id="calc-form" onsubmit="submitForm(event)">
+            <label for="operator1">Operator 1:</label>
+            <input type="number" id="operator1" name="operator1" required>
+
+            <label for="operation">Operation:</label>
+            <select id="operation" name="operation" required>
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+
+            <label for="operator2">Operator 2:</label>
+            <input type="number" id="operator2" name="operator2" required>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        <div id="result">
+            {% if result is not none %}
+                <h2>Result: {{ result }}</h2>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent default form submission
+            const operator1 = document.getElementById('operator1').value;
+            const operator2 = document.getElementById('operator2').value;
+            const operation = document.getElementById('operation').value;
+
+            // Construct the URL based on the selected operation and input values
+            const url = `/calculate/${operation}/${operator1}/${operator2}`;
+
+            // Redirect to the constructed URL
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
